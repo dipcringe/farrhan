@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Farrhan - Video Editor, Bassist, Headphone Collector, JRPG Enjoyer">
-  <title>farrhan.</title>
+  <meta name="description" content="About Farrhan - Video Editor, Bassist, and Tech Enthusiast">
+  <title>farrhan. (video editing)</title>
   <link href="https://fonts.googleapis.com/css2?family=PT+Mono&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="/assets/favicon.png">
   <style>
@@ -60,39 +60,11 @@
       color: var(--text);
     }
 
-    .name {
-      font-family: 'PT Serif', serif;
-      font-size: 4rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    nav {
-      padding: 1rem;
-      display: grid;
-      gap: 0.3rem;
-    }
-
-    .btn {
-      padding: 1rem;
-      background-color: var(--border);
-      color: var(--bg-card);
-      text-align: center;
-      text-decoration: none;
-      font-size: 1rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      transition: all 0.2s ease;
-    }
-
-    .btn:hover {
-      opacity: 0.8;
-    }
-
     .back-link {
       color: var(--text);
       font-size: 1rem;
       transition: opacity 0.2s ease;
+      display: inline-block;
     }
 
     .back-link:hover {
@@ -102,19 +74,19 @@
     .text {
       font-family: 'PT Mono', monospace;
       font-size: 1rem;
-      text-align: center;
+      padding: 1rem;
+      color: var(--text);
+    }
+    
+    mark {
+      background-color: #e0e0e0;
       color: var(--text);
     }
 
   </style>
 </head>
 <body>
-  <video autoplay muted loop playsinline id="bg-video">
-    <source src="/assets/bg-loop.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
 
- <body>
   <video autoplay muted loop playsinline id="bg-video">
     <source src="/assets/bg-loop.mp4" type="video/mp4">
     Your browser does not support the video tag.
@@ -124,13 +96,16 @@
     <header>
       <a href="/index.html" class="back-link">← farrhan. / Home</a>
     </header>
-
-    <nav>
-      <a href="/services/video-editing.html" class="btn">Video Editing</a>
-      <a href="/pages/404.html" class="btn">Graphic Design</a>
-      <a href="https://www.youtube.com/watch?v=J2aJlb-bmuM" class="btn">Fishing Partner</a>
-    </nav>
   </main>
+
+  <section class="card">
+    <article class="text">
+      <p>
+        This page is still being constructed! Sorry!
+        <a href="/index.html" class="back-link">Click here to go back to the homepage</a>
+      </p>
+    </article>
+  </section>
 
 </body>
 </html>
