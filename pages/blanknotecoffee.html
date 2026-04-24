@@ -1,378 +1,459 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Blank Note Coffee — Not Just Coffee. It's a Daily Note. TTDI Jaya, Shah Alam.">
-  <title>Blank Note Coffee</title>
-  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Blank Note Coffee — Not Just Coffee. It's a Daily Note. TTDI Jaya, Shah Alam."
+    />
+    <title>Blank Note Coffee</title>
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
 
-  <link href="https://fonts.googleapis.com/css2?family=PT+Mono&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=PT+Mono&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
 
-  <style>
-    /* ── TOKENS ── */
-    :root {
-      --bg-page: #0B1215;
-      --bg-card: #F3F3F3;
-      --text:    #0B1215;
-      --border:  #0B1215;
-      --thick:   6px solid var(--border);
-      --thin:    3px solid var(--border);
-      --mono:    'PT Mono', monospace;
-      --serif:   'PT Serif', serif;
-    }
+    <style>
+      /* ── TOKENS ── */
+      :root {
+        --bg-page: #0b1215;
+        --bg-card: #f3f3f3;
+        --text: #0b1215;
+        --border: #0b1215;
+        --thick: 6px solid var(--border);
+        --thin: 3px solid var(--border);
+        --mono: "PT Mono", monospace;
+        --serif: "PT Serif", serif;
+      }
 
-    /* ── RESET ── */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+      /* ── RESET ── */
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
 
-    body {
-      background: var(--bg-page);
-      color: var(--text);
-      font-family: var(--mono);
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1rem;
-      gap: 1rem;
-    }
+      body {
+        background: var(--bg-page);
+        color: var(--text);
+        font-family: var(--mono);
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        gap: 1rem;
+      }
 
-    /* ── BACKGROUND IMAGE ── */
-    #bg-image {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover; /* This prevents the image from stretching */
-      z-index: -1;      /* Keeps the image behind your content */
-    }
+      /* ── BACKGROUND IMAGE ── */
+      #bg-image {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+      }
 
-    /* ── CARD ── */
-    .card {
-      width: 100%;
-      max-width: 650px;
-      background: var(--bg-card);
-      border: var(--thin);
-    }
+      /* ── CARD ── */
+      .card {
+        width: 100%;
+        max-width: 650px;
+        background: var(--bg-card);
+        border: var(--thin);
+      }
 
-    /* ── HEADER ── */
-    header {
-      padding: 1.5rem 1rem 1rem;
-      border-bottom: var(--thick);
-      text-align: center;
-    }
+      /* ── HEADER ── */
+      header {
+        padding: 1.5rem 1rem 1rem;
+        border-bottom: var(--thick);
+        text-align: center;
+      }
 
-    .brand {
-      font-family: var(--serif);
-      font-size: clamp(2.4rem, 10vw, 3.5rem);
-      font-weight: 700;
-      line-height: 1;
-    }
+      .brand {
+        font-family: var(--serif);
+        font-size: clamp(2.4rem, 10vw, 3.5rem);
+        font-weight: 700;
+        line-height: 1;
+      }
 
-    .brand em {
-      font-style: italic;
-      font-weight: 400;
-    }
+      .brand em {
+        font-style: italic;
+        font-weight: 400;
+      }
 
-    .tagline {
-      margin-top: 0.5rem;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      opacity: 0.5;
-    }
+      .tagline {
+        margin-top: 0.5rem;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        opacity: 0.5;
+      }
 
-    /* ── NAV TABS ── */
-    .tabs {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border-bottom: var(--thick);
-    }
+      /* ── NAV TABS ── */
+      .tabs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-bottom: var(--thick);
+      }
 
-    .tab {
-      padding: 0.75rem 0.5rem;
-      background: none;
-      border: none;
-      border-right: var(--thin);
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      cursor: pointer;
-      text-align: center;
-      transition: background 0.15s ease;
-      -webkit-tap-highlight-color: transparent;
-    }
+      .tab {
+        padding: 0.75rem 0.5rem;
+        background: none;
+        border: none;
+        border-right: var(--thin);
+        font-family: var(--mono);
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        text-align: center;
+        transition: background 0.15s ease;
+        -webkit-tap-highlight-color: transparent;
+      }
 
-    .tab:last-child { border-right: none; }
+      .tab:last-child {
+        border-right: none;
+      }
 
-    .tab:hover   { background: rgba(11,18,21,0.06); }
-    .tab.active  { background: var(--border); color: var(--bg-card); }
+      .tab:hover {
+        background: rgba(11, 18, 21, 0.06);
+      }
 
-    /* ── PANELS ── */
-    .panel { display: none; }
-    .panel.active { display: block; }
+      .tab.active {
+        background: var(--border);
+        color: var(--bg-card);
+      }
 
-    /* ── SECTION BLOCK ── */
-    .block {
-      padding: 1.25rem 1rem;
-      border-bottom: var(--thin);
-    }
+      /* ── PANELS ── */
+      .panel {
+        display: none;
+      }
 
-    .block:last-child { border-bottom: none; }
+      .panel.active {
+        display: block;
+      }
 
-    .block-label {
-      font-size: 0.6rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      opacity: 0.35;
-      margin-bottom: 0.6rem;
-    }
+      /* ── SECTION BLOCK ── */
+      .block {
+        padding: 1.25rem 1rem;
+        border-bottom: var(--thin);
+      }
 
-    /* ── MENU ── */
-    .menu-cat {
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      border-bottom: var(--thick);
-      padding-bottom: 0.4rem;
-      margin-bottom: 0.2rem;
-    }
+      .block:last-child {
+        border-bottom: none;
+      }
 
-    .menu-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 1rem;
-      padding: 0.75rem 0;
-      border-bottom: 1px solid rgba(11,18,21,0.1);
-    }
+      .block-label {
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        opacity: 0.35;
+        margin-bottom: 0.6rem;
+      }
 
-    .menu-item:last-child { border-bottom: none; }
+      /* ── MENU ── */
+      .menu-cat {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        border-bottom: var(--thick);
+        padding-bottom: 0.4rem;
+        margin-bottom: 0.2rem;
+      }
 
-    .item-name {
-      font-family: var(--serif);
-      font-size: 1.05rem;
-      font-weight: 400;
-    }
+      .menu-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 1rem;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(11, 18, 21, 0.1);
+      }
 
-    .item-desc {
-      display: block;
-      font-size: 0.65rem;
-      opacity: 0.4;
-      margin-top: 0.1rem;
-    }
+      .menu-item:last-child {
+        border-bottom: none;
+      }
 
-    .item-price {
-      font-size: 0.8rem;
-      white-space: nowrap;
-      opacity: 0.6;
-    }
+      .item-name {
+        font-family: var(--serif);
+        font-size: 1.05rem;
+        font-weight: 400;
+      }
 
-    /* ── HOURS ── */
-    .hours-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.65rem 0;
-      border-bottom: 1px solid rgba(11,18,21,0.1);
-      font-size: 0.85rem;
-    }
+      .item-desc {
+        display: block;
+        font-size: 0.65rem;
+        opacity: 0.4;
+        margin-top: 0.1rem;
+      }
 
-    .hours-row:last-child { border-bottom: none; }
-    .closed { color: #b52b2b; }
+      .item-price {
+        font-size: 0.8rem;
+        white-space: nowrap;
+        opacity: 0.6;
+      }
 
-    /* ── AMENITIES ── */
-    .amenities {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.5rem;
-    }
+      /* ── HOURS ── */
+      .hours-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.65rem 0;
+        border-bottom: 1px solid rgba(11, 18, 21, 0.1);
+        font-size: 0.85rem;
+      }
 
-    .amenity {
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 0.6rem 0.75rem;
-      border: var(--thin);
-      text-align: center;
-    }
+      .hours-row:last-child {
+        border-bottom: none;
+      }
 
-    /* ── CONTACT LINK ── */
-    .contact-link {
-      color: var(--text);
-      font-size: 0.85rem;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
+      .closed {
+        color: #b52b2b;
+      }
 
-    .contact-link:hover { opacity: 0.6; }
+      /* ── AMENITIES ── */
+      .amenities {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+      }
 
-    /* ── FOOTER ── */
-    footer {
-      width: 100%;
-      max-width: 650px;
-      display: flex;
-      justify-content: space-between;
-      padding: 0.25rem 0;
-    }
+      .amenity {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding: 0.6rem 0.75rem;
+        border: var(--thin);
+        text-align: center;
+      }
 
-    .footer-text {
-      font-size: 0.6rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: rgba(243,243,243,0.25);
-    }
-  </style>
-</head>
-<body>
+      /* ── CONTACT LINK ── */
+      .contact-link {
+        color: var(--text);
+        font-size: 0.85rem;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
 
-  <img src="/assets/brutalist.jpg" id="bg-image" alt="Brutalist architecture background">
+      .contact-link:hover {
+        opacity: 0.6;
+      }
 
-  <main class="card">
+      /* ── FOOTER ── */
+      footer {
+        width: 100%;
+        max-width: 650px;
+        display: flex;
+        justify-content: space-between;
+        padding: 0.25rem 0;
+      }
 
-    <header>
-      <h1 class="brand">Blank <em>Note</em> Coffee</h1>
-      <p class="tagline">Not just coffee &mdash; it's a daily note.</p>
-    </header>
+      .footer-text {
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: rgba(243, 243, 243, 0.25);
+      }
+    </style>
+  </head>
 
-    <!-- TAB NAV -->
-    <div class="tabs" role="tablist">
-      <button class="tab active" role="tab" aria-selected="true"  data-target="menu">Menu</button>
-      <button class="tab"        role="tab" aria-selected="false" data-target="story">Story</button>
-      <button class="tab"        role="tab" aria-selected="false" data-target="visit">Visit</button>
-    </div>
+  <body>
+    <img src="/assets/brutalist.jpg" id="bg-image" alt="Brutalist architecture background" />
 
-    <!-- MENU PANEL -->
-    <section class="panel active" id="menu" role="tabpanel">
+    <main class="card">
+      <header>
+        <h1 class="brand">Blank <em>Note</em> Coffee</h1>
+        <p class="tagline">Not just coffee &mdash; it's a daily note.</p>
+      </header>
 
-      <div class="block">
-        <p class="menu-cat">Black &amp; White</p>
-        <div class="menu-item">
-          <div><span class="item-name">PUT DRINK HERE</span><span class="item-desc">Description</span></div>
-          <span class="item-price">RM 00</span>
-        </div>
-        <div class="menu-item">
-          <div><span class="item-name">PUT DRINK HERE</span><span class="item-desc">Description</span></div>
-          <span class="item-price">RM 00</span>
-        </div>
-        <div class="menu-item">
-          <div><span class="item-name">PUT DRINK HERE</span><span class="item-desc">Description</span></div>
-          <span class="item-price">RM 00</span>
-        </div>
+      <!-- TAB NAV -->
+      <div class="tabs" role="tablist">
+        <button
+          class="tab active"
+          role="tab"
+          aria-selected="true"
+          data-target="menu"
+        >
+          Menu
+        </button>
+        <button
+          class="tab"
+          role="tab"
+          aria-selected="false"
+          data-target="story"
+        >
+          Story
+        </button>
+        <button
+          class="tab"
+          role="tab"
+          aria-selected="false"
+          data-target="visit"
+        >
+          Visit
+        </button>
       </div>
 
-      <div class="block">
-        <p class="menu-cat">Specialty</p>
-        <div class="menu-item">
-          <div><span class="item-name">PUT DRINK HERE</span><span class="item-desc">Description</span></div>
-          <span class="item-price">RM 00</span>
+      <!-- MENU PANEL -->
+      <section class="panel active" id="menu" role="tabpanel">
+        <div class="block">
+          <p class="menu-cat">Black &amp; White</p>
+          <div class="menu-item">
+            <div>
+              <span class="item-name">PUT DRINK HERE</span>
+              <span class="item-desc">Description</span>
+            </div>
+            <span class="item-price">RM 00</span>
+          </div>
+          <div class="menu-item">
+            <div>
+              <span class="item-name">PUT DRINK HERE</span>
+              <span class="item-desc">Description</span>
+            </div>
+            <span class="item-price">RM 00</span>
+          </div>
+          <div class="menu-item">
+            <div>
+              <span class="item-name">PUT DRINK HERE</span>
+              <span class="item-desc">Description</span>
+            </div>
+            <span class="item-price">RM 00</span>
+          </div>
         </div>
-        <div class="menu-item">
-          <div><span class="item-name">PUT DRINK HERE</span><span class="item-desc">Description</span></div>
-          <span class="item-price">RM 00</span>
+
+        <div class="block">
+          <p class="menu-cat">Specialty</p>
+          <div class="menu-item">
+            <div>
+              <span class="item-name">PUT DRINK HERE</span>
+              <span class="item-desc">Description</span>
+            </div>
+            <span class="item-price">RM 00</span>
+          </div>
+          <div class="menu-item">
+            <div>
+              <span class="item-name">PUT DRINK HERE</span>
+              <span class="item-desc">Description</span>
+            </div>
+            <span class="item-price">RM 00</span>
+          </div>
         </div>
-      </div>
 
-      <div class="block">
-        <p class="menu-cat">Food by Hello John</p>
-        <div class="menu-item">
-          <div><span class="item-name">PUT FOOD HERE</span><span class="item-desc">Description</span></div>
-          <span class="item-price">RM 00</span>
+        <div class="block">
+          <p class="menu-cat">Food by Hello John</p>
+          <div class="menu-item">
+            <div>
+              <span class="item-name">PUT FOOD HERE</span>
+              <span class="item-desc">Description</span>
+            </div>
+            <span class="item-price">RM 00</span>
+          </div>
+          <div class="menu-item">
+            <div>
+              <span class="item-name">PUT FOOD HERE</span>
+              <span class="item-desc">Description</span>
+            </div>
+            <span class="item-price">RM 00</span>
+          </div>
         </div>
-        <div class="menu-item">
-          <div><span class="item-name">PUT FOOD HERE</span><span class="item-desc">Description</span></div>
-          <span class="item-price">RM 00</span>
+      </section>
+
+      <!-- STORY PANEL -->
+      <section class="panel" id="story" role="tabpanel">
+        <div class="block">
+          <p class="block-label">About</p>
+          <p style="font-size: 0.9rem; line-height: 1.7; opacity: 0.75;">
+            Urban. Industrial. Casual.<br /><br />
+            Located in TTDI Jaya, Shah Alam — Blank Note Coffee is established
+            in 2024 as a side project.<br /><br />
+            We designed this cafe for both focus, and connection. Our space is
+            surprisingly quiet even though it's right next to the highway.
+            Whether you are here to do some work or catch up with your friends,
+            we provide the blank canvas you need to unwind.<br /><br />
+          </p>
         </div>
-      </div>
 
-    </section>
-
-    <!-- STORY PANEL -->
-    <section class="panel" id="story" role="tabpanel">
-
-      <div class="block">
-        <p class="block-label">About</p>
-        <p style="font-size: 0.9rem; line-height: 1.7; opacity: 0.75;">
-          Urban. Industrial. Casual.<br><br>
-          
-          Located in TTDI Jaya, Shah Alam- Blank Note Coffee is established in 2024 as a side project.<br><br>
-          We designed this cafe for both focus, and connection. Our space is surprisingly quiet even though it's right next to the highway. Whether you are here to do some work or catch up with your friends, we provide the blank canvas you need to unwind.<br><br>
-
-        </p>
-      </div>
-
-      <div class="block">
-        <p class="block-label">What We Offer</p>
-        <div class="amenities">
-          <div class="amenity">Slow Bar Coffee</div>
-          <div class="amenity">Warm Kitchen</div>
-          <div class="amenity">Board Games</div>
-          <div class="amenity">Surau Available</div>
+        <div class="block">
+          <p class="block-label">What We Offer</p>
+          <div class="amenities">
+            <div class="amenity">Slow Bar Coffee</div>
+            <div class="amenity">Warm Kitchen</div>
+            <div class="amenity">Board Games</div>
+            <div class="amenity">Surau Available</div>
+          </div>
         </div>
-      </div>
+      </section>
 
-    </section>
-
-    <!-- VISIT PANEL -->
-    <section class="panel" id="visit" role="tabpanel">
-
-      <div class="block">
-        <p class="block-label">Location</p>
-        <p style="font-size: 0.9rem; line-height: 1.7; opacity: 0.75;">
-          TTDI Jaya, Shah Alam<br>Selangor, Malaysia<br><br>
-          <a href="https://www.youtube.com/watch?v=J2aJlb-bmuM" class="btn">Click here to open on Waze!</a>
-        </p>
-      </div>
-      
-      <div class="block">
-        <p class="block-label">Hours</p>
-        <div class="hours-row">
-          <span>Sun, Mon, Wed, Thu</span>
-          <span>5 PM – 1 AM</span>
+      <!-- VISIT PANEL -->
+      <section class="panel" id="visit" role="tabpanel">
+        <div class="block">
+          <p class="block-label">Location</p>
+          <p style="font-size: 0.9rem; line-height: 1.7; opacity: 0.75;">
+            TTDI Jaya, Shah Alam<br />Selangor, Malaysia<br /><br />
+            <a href="https://www.youtube.com/watch?v=J2aJlb-bmuM" class="btn">
+              Click here to open on Waze!
+            </a>
+          </p>
         </div>
-        <div class="hours-row">
-          <span>Fri – Sat</span>
-          <span>5 PM – 2 AM</span>
+
+        <div class="block">
+          <p class="block-label">Hours</p>
+          <div class="hours-row">
+            <span>Sun, Mon, Wed, Thu</span>
+            <span>5 PM – 1 AM</span>
+          </div>
+          <div class="hours-row">
+            <span>Fri – Sat</span>
+            <span>5 PM – 2 AM</span>
+          </div>
+          <div class="hours-row closed">
+            <span>Tuesday</span>
+            <span>Closed</span>
+          </div>
         </div>
-        <div class="hours-row closed">
-          <span>Tuesday</span>
-          <span>Closed</span>
+
+        <div class="block">
+          <p class="block-label">Contact us</p>
+          <a class="contact-link" href="mailto:contact@blanknotecoffee.com">
+            contact@blanknotecoffee.com
+          </a>
         </div>
-      </div>
+      </section>
+    </main>
 
-      <div class="block">
-        <p class="block-label">Contact us</p>
-        <a class="contact-link" href="mailto:contact@blanknotecoffee.com">contact@blanknotecoffee.com</a>
-      </div>
+    <footer>
+      <span class="footer-text">Blank Note Coffee</span>
+      <span class="footer-text">Est. 2026 &middot; Shah Alam</span>
+    </footer>
 
-    </section>
+    <script>
+      const tabs = document.querySelectorAll(".tab");
+      const panels = document.querySelectorAll(".panel");
 
-  </main>
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const target = tab.dataset.target;
 
-  <footer>
-    <span class="footer-text">Blank Note Coffee</span>
-    <span class="footer-text">Est. 2026 &middot; Shah Alam</span>
-  </footer>
+          tabs.forEach((t) => {
+            t.classList.remove("active");
+            t.setAttribute("aria-selected", "false");
+          });
+          panels.forEach((p) => p.classList.remove("active"));
 
-  <script>
-    const tabs   = document.querySelectorAll('.tab');
-    const panels = document.querySelectorAll('.panel');
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const target = tab.dataset.target;
-
-        tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
-        panels.forEach(p => p.classList.remove('active'));
-
-        tab.classList.add('active');
-        tab.setAttribute('aria-selected', 'true');
-        document.getElementById(target).classList.add('active');
+          tab.classList.add("active");
+          tab.setAttribute("aria-selected", "true");
+          document.getElementById(target).classList.add("active");
+        });
       });
-    });
-  </script>
-
-</body>
+    </script>
+  </body>
 </html>
